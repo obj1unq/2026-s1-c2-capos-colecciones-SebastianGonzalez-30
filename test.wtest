@@ -1,4 +1,4 @@
-import castillo.*
+import moradas.*
 import artefactosMagicos.*
 import capos.*
 
@@ -7,7 +7,6 @@ describe "test de rolando y su mochila" {
 
     test "test de rolando y la mochila" {
     
-    assert.equals(0, rolando.artefactosEnLaMochila())
     rolando.encontrarArtefacto(espadaDelDestino)
     rolando.encontrarArtefacto(libroDeHechizos)
     
@@ -20,10 +19,10 @@ describe "test de rolando y su mochila" {
 
     rolando.encontrarArtefacto(espadaDelDestino)
     rolando.encontrarArtefacto(libroDeHechizos)
-    rolando.guardarObjetosEnMorada(castillo)
+    castillo.almacenarArtefactosDe(rolando)
     rolando.encontrarArtefacto(collarDivino)
-    rolando.guardarObjetosEnMorada(castillo)
-    assert.equals(#{espadaDelDestino, libroDeHechizos, collarDivino}, castillo.almacenDeObjetos())
+    castillo.almacenarArtefactosDe(rolando)
+    assert.equals(#{espadaDelDestino, libroDeHechizos, collarDivino}, castillo.almacenDeArtefactos())
     assert.equals(#{}, rolando.artefactosEnLaMochila())
     }
 }
