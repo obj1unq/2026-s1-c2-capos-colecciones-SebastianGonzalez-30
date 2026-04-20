@@ -6,10 +6,11 @@ object rolando {
  
     var capacidadMaxima = 2
     const artefactosEnLaMochila =  #{}
-    
+    const historialDeArtefactosEncontrados = [] 
 
     method encontrarArtefacto(artefacto) {
       
+        historialDeArtefactosEncontrados.add(artefacto) 
         self.validarRecoleccionDeArtefacto()
         self.recolectarObjeto(artefacto)
 
@@ -49,14 +50,14 @@ object rolando {
     method guardarObjetosEnMorada(morada) {
       
         
-        morada.almacenDeObjetos().addAll(self.artefactosEnLaMochila())
+        morada.almacenDeObjetos().addAll(self.artefactosEnLaMochila()) //cambiarlo a la morada como un metodo
         artefactosEnLaMochila.clear()
 
     }
 
     method listaDeArtefactosTotales(morada) {
       
-        return 
+        return self.artefactosEnLaMochila().union(morada.almacenDeObjetos())
 
     }
 
