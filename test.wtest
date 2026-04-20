@@ -1,0 +1,29 @@
+import castillo.*
+import artefactosMagicos.*
+import capos.*
+
+
+describe "test de rolando y su mochila" {
+
+    test "test de rolando y la mochila" {
+    
+    assert.equals(0, rolando.artefactosEnLaMochila())
+    rolando.encontrarArtefacto(espadaDelDestino)
+    rolando.encontrarArtefacto(libroDeHechizos)
+    
+    assert.throwsException({rolando.encontrarArtefacto(collarDivino)})
+
+    assert.equals([espadaDelDestino, libroDeHechizos], rolando.artefactosEnLaMochila())
+    }
+    
+    test "castillo de rolando" {
+
+    rolando.encontrarArtefacto(espadaDelDestino)
+    rolando.encontrarArtefacto(libroDeHechizos)
+    rolando.guardarObjetosEnMorada(castillo)
+    rolando.encontrarArtefacto(collarDivino)
+    rolando.guardarObjetosEnMorada(castillo)
+    assert.equals(#{espadaDelDestino, libroDeHechizos, collarDivino}, castillo.almacenDeObjetos())
+    assert.equals(#{}, rolando.artefactosEnLaMochila())
+    }
+}
