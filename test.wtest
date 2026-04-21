@@ -9,10 +9,7 @@ describe "test de rolando y su mochila" {
     
     rolando.encontrarArtefacto(espadaDelDestino)
     rolando.encontrarArtefacto(libroDeHechizos)
-    
-    assert.throwsException({rolando.encontrarArtefacto(collarDivino)})
-
-    assert.equals([espadaDelDestino, libroDeHechizos], rolando.artefactosEnLaMochila())
+    assert.equals(#{espadaDelDestino, libroDeHechizos}, rolando.artefactosEnLaMochila())
     }
     
     test "castillo de rolando" {

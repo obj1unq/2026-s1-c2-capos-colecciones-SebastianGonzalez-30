@@ -3,7 +3,7 @@ import capos.*
 
 object castillo {
   
-  const almacenDeArtefactos = []
+  const almacenDeArtefactos = #{}
 
   method almacenDeArtefactos() {
     

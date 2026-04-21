@@ -5,14 +5,13 @@ import moradas.*
 object rolando {
  
     var capacidadMaxima = 2
-    const artefactosEnLaMochila =  []
+    const artefactosEnLaMochila =  #{}
     const historialDeArtefactosEncontrados = [] 
 
     method encontrarArtefacto(artefacto) {
       
         historialDeArtefactosEncontrados.add(artefacto) 
-        self.validarRecoleccionDeArtefacto()
-        self.recolectarArtefacto(artefacto)
+        self.recolectarArtefactoSiPuede(artefacto)
 
     }
 
@@ -30,16 +29,25 @@ object rolando {
 
     method validarRecoleccionDeArtefacto() {
       
-        if(artefactosEnLaMochila.size() == capacidadMaxima) {
+        return artefactosEnLaMochila.size() < self.capacidadMaxima() {
 
-            self.error("no hay suficiente espacio en la mochila para recolectar el artefacto")
-        }
+             
+        } 
     }
 
     method recolectarArtefacto(artefacto) {
 
         artefactosEnLaMochila.add(artefacto)
       
+    }
+
+    method recolectarArtefactoSiPuede(artefacto) {
+      
+        if(self.validarRecoleccionDeArtefacto()) {
+
+            self.recolectarArtefacto(artefacto)
+        }
+
     }
 
     method artefactosEnLaMochila() {
