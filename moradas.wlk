@@ -13,6 +13,13 @@ object castillo {
   method almacenarArtefactosDe(personaje) {
     
     self.almacenDeArtefactos().addAll(personaje.artefactosEnLaMochila())
+    
+
+  }
+
+  method añadirArtefactoAlAlmacen(artefacto) {
+    
+    almacenDeArtefactos.add(artefacto)
 
   }
 }

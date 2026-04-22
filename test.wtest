@@ -3,7 +3,7 @@ import artefactosMagicos.*
 import capos.*
 
 
-describe "test de rolando y su mochila" {
+describe "test de rolando, su mochila, su castillo e historial " {
 
     test "test de rolando y la mochila" {
     
@@ -16,10 +16,29 @@ describe "test de rolando y su mochila" {
 
     rolando.encontrarArtefacto(espadaDelDestino)
     rolando.encontrarArtefacto(libroDeHechizos)
-    castillo.almacenarArtefactosDe(rolando)
+    rolando.guardarArtefactosEnMorada(castillo)
     rolando.encontrarArtefacto(collarDivino)
-    castillo.almacenarArtefactosDe(rolando)
+    rolando.guardarArtefactosEnMorada(castillo)
     assert.equals(#{espadaDelDestino, libroDeHechizos, collarDivino}, castillo.almacenDeArtefactos())
     assert.equals(#{}, rolando.artefactosEnLaMochila())
+    }
+
+    test "artefactos totales de rolando" {
+
+        castillo.añadirArtefactoAlAlmacen(collarDivino)
+        castillo.añadirArtefactoAlAlmacen(espadaDelDestino)
+        rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+        assert assert.equals(#{collarDivino, espadaDelDestino, armaduraDeAceroValyrio}, rolando.listaDeArtefactosTotales(castillo))
+    }
+
+    test "el historial de encuentros de artefactos de rolando" {
+      
+      rolando.encontrarArtefacto(espadaDelDestino)
+      rolando.encontrarArtefacto(libroDeHechizos)
+      rolando.encontrarArtefacto(collarDivino)
+      rolando.guardarArtefactosEnMorada(castillo)
+      rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+      rolando.encontrarArtefacto(collarDivino)
+      assert.equals([espadaDelDestino, libroDeHechizos, collarDivino, armaduraDeAceroValyrio, collarDivino], rolando.historialDeArtefactosEncontrados())
     }
 }

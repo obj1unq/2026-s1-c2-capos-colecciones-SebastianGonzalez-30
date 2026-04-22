@@ -58,7 +58,7 @@ object rolando {
     method guardarArtefactosEnMorada(morada) {
       
         
-        morada.almacenarArtefactosDe(self)  
+        morada.almacenarArtefactosDe(self)
         artefactosEnLaMochila.clear()
 
     }
@@ -69,4 +69,8 @@ object rolando {
 
     }
 
+    method historialDeArtefactosEncontrados() {
+      
+      return historialDeArtefactosEncontrados
+    }
 }
