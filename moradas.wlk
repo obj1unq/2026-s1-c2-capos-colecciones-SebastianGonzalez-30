@@ -14,6 +14,7 @@ object castillo {
     
     self.almacenDeArtefactos().addAll(personaje.artefactosEnLaMochila())
     
+    
 
   }
 
