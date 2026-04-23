@@ -21,11 +21,29 @@ object espadaDelDestino {
 
 object libroDeHechizos {
   
-    method poderDeArtefactoUsadoPor(personaje) {
+    var hechizosDisponibles = []
+    var cantidadDeBatallasEnUso = 0
+    var primerHechizo = hechizosDisponibles.first()
 
+    method poderDeArtefactoUsadoPor(personaje) {
+        
+    
+
+        return primerHechizo.poderDePeleaPara(personaje)
+    }
+
+    method usarArtefacto() {
+      
+        cantidadDeBatallasEnUso = cantidadDeBatallasEnUso + 1
+        hechizosDisponibles.remove(primerHechizo)
 
     }
 
+    method añadirHechizoAlLibro(unHechizo) {
+      
+        hechizosDisponibles.add(unHechizo)
+
+    }
 }
 
 object collarDivino {

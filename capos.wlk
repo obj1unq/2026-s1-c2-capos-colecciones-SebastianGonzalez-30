@@ -112,4 +112,11 @@ object rolando {
 
     }
 
+    method poderDeArtefactoMasPoderosoEnLaMorada() {
+      
+        const artefactoMasPoderoso = morada.almacenDeArtefactos().max({ artefacto => artefacto.poderDeArtefactoUsadoPor(self)})
+
+        return artefactoMasPoderoso.poderDeArtefactoUsadoPor(self)
+    }
+
 }
