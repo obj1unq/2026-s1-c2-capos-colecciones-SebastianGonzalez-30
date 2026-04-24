@@ -1,0 +1,92 @@
+import hechizos.*
+import moradas.*
+import artefactosMagicos.*
+import capos.*
+
+
+describe "test de rolando, su mochila, su castillo e historial " {
+
+    test "test de rolando y la mochila" {
+    
+    rolando.encontrarArtefacto(espadaDelDestino)
+    rolando.encontrarArtefacto(libroDeHechizos)
+    assert.equals(#{espadaDelDestino, libroDeHechizos}, rolando.artefactosEnLaMochila())
+    }
+    
+    test "castillo de rolando" {
+
+    rolando.encontrarArtefacto(espadaDelDestino)
+    rolando.encontrarArtefacto(libroDeHechizos)
+    rolando.guardarArtefactosEnMorada()
+    rolando.encontrarArtefacto(collarDivino)
+    rolando.guardarArtefactosEnMorada()
+    assert.equals(#{espadaDelDestino, libroDeHechizos, collarDivino}, castillo.almacenDeArtefactos())
+    assert.equals(#{}, rolando.artefactosEnLaMochila())
+    }
+
+    test "artefactos totales de rolando" {
+
+        castillo.añadirArtefactoAlAlmacen(collarDivino)
+        castillo.añadirArtefactoAlAlmacen(espadaDelDestino)
+        rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+        assert assert.equals(#{collarDivino, espadaDelDestino, armaduraDeAceroValyrio}, rolando.artefactosTotales())
+    }
+
+    test "el historial de encuentros de artefactos de rolando" {
+      
+      rolando.encontrarArtefacto(espadaDelDestino)
+      rolando.encontrarArtefacto(libroDeHechizos)
+      rolando.encontrarArtefacto(collarDivino)
+      rolando.guardarArtefactosEnMorada()
+      rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+      rolando.encontrarArtefacto(collarDivino)
+      assert.equals([espadaDelDestino, libroDeHechizos, collarDivino, armaduraDeAceroValyrio, collarDivino], rolando.historialDeArtefactosEncontrados())
+    }
+
+    test "simulacion de batallas" {
+      
+        rolando.poderBase(5)
+        rolando.capacidadMaxima(3)
+        rolando.encontrarArtefacto(espadaDelDestino)
+        rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+        rolando.encontrarArtefacto(collarDivino)
+        
+        rolando.batalla() //simulacion de la primer batalla
+        assert.equals(6, rolando.poderBase())
+        assert.equals(3, espadaDelDestino.poderDeArtefactoUsadoPor(rolando))
+        assert.equals(6, armaduraDeAceroValyrio.poderDeArtefactoUsadoPor(rolando))
+        assert.equals(3, collarDivino.poderDeArtefactoUsadoPor(rolando))
+        
+        rolando.batalla() //simulacion de la segunda batalla
+        assert.equals(7, rolando.poderBase())
+        assert.equals(3.5, espadaDelDestino.poderDeArtefactoUsadoPor(rolando))
+        assert.equals(6, armaduraDeAceroValyrio.poderDeArtefactoUsadoPor(rolando))
+        assert.equals(5, collarDivino.poderDeArtefactoUsadoPor(rolando))
+        
+        rolando.batalla() //simulacion de la tercer batalla
+        assert.equals(8, rolando.poderBase())
+        assert.equals(4, espadaDelDestino.poderDeArtefactoUsadoPor(rolando))
+        assert.equals(6, armaduraDeAceroValyrio.poderDeArtefactoUsadoPor(rolando))
+        assert.equals(6, collarDivino.poderDeArtefactoUsadoPor(rolando))
+    }
+
+    test "libro de hechizos de ronaldo" {
+      
+        libroDeHechizos.añadirHechizoAlLibro(bendicion)
+        libroDeHechizos.añadirHechizoAlLibro(invisibilidad)
+        libroDeHechizos.añadirHechizoAlLibro(invocacion)
+        rolando.recolectarArtefacto(libroDeHechizos)
+        castillo.añadirArtefactoAlAlmacen(espadaDelDestino)
+        castillo.añadirArtefactoAlAlmacen(armaduraDeAceroValyrio)
+        castillo.añadirArtefactoAlAlmacen(collarDivino)
+
+        assert.equals(4, libroDeHechizos.poderDeArtefactoUsadoPor(rolando))
+        rolando.batalla()
+        assert.equals(6, libroDeHechizos.poderDeArtefactoUsadoPor(rolando))
+        rolando.batalla()
+        assert.equals(7, libroDeHechizos.poderDeArtefactoUsadoPor(rolando))
+        rolando.batalla()
+        assert.equals(0, libroDeHechizos.poderDeArtefactoUsadoPor(rolando))
+    }
+
+}
