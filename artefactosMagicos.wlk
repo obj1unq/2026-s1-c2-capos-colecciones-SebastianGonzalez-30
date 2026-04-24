@@ -23,19 +23,26 @@ object libroDeHechizos {
   
     var hechizosDisponibles = []
     var cantidadDeBatallasEnUso = 0
-    var primerHechizo = hechizosDisponibles.first()
+    
 
     method poderDeArtefactoUsadoPor(personaje) {
         
     
+         return(if(hechizosDisponibles.isEmpty()) {
 
-        return primerHechizo.poderDePeleaPara(personaje)
+            0
+         } else {
+            
+            self.primerHechizo().poderDePeleaPara(personaje)
+         }
+         )
+            
     }
 
     method usarArtefacto() {
       
         cantidadDeBatallasEnUso = cantidadDeBatallasEnUso + 1
-        hechizosDisponibles.remove(primerHechizo)
+        hechizosDisponibles.remove(self.primerHechizo())
 
     }
 
@@ -44,6 +51,15 @@ object libroDeHechizos {
         hechizosDisponibles.add(unHechizo)
 
     }
+
+    method primerHechizo() {
+      
+        return hechizosDisponibles.first()
+
+    }
+
+    
+
 }
 
 object collarDivino {

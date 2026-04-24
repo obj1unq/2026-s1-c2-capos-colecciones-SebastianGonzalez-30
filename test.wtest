@@ -1,3 +1,4 @@
+import hechizos.*
 import moradas.*
 import artefactosMagicos.*
 import capos.*
@@ -68,4 +69,24 @@ describe "test de rolando, su mochila, su castillo e historial " {
         assert.equals(6, armaduraDeAceroValyrio.poderDeArtefactoUsadoPor(rolando))
         assert.equals(6, collarDivino.poderDeArtefactoUsadoPor(rolando))
     }
+
+    test "libro de hechizos de ronaldo" {
+      
+        libroDeHechizos.añadirHechizoAlLibro(bendicion)
+        libroDeHechizos.añadirHechizoAlLibro(invisibilidad)
+        libroDeHechizos.añadirHechizoAlLibro(invocacion)
+        rolando.recolectarArtefacto(libroDeHechizos)
+        castillo.añadirArtefactoAlAlmacen(espadaDelDestino)
+        castillo.añadirArtefactoAlAlmacen(armaduraDeAceroValyrio)
+        castillo.añadirArtefactoAlAlmacen(collarDivino)
+
+        assert.equals(4, libroDeHechizos.poderDeArtefactoUsadoPor(rolando))
+        rolando.batalla()
+        assert.equals(6, libroDeHechizos.poderDeArtefactoUsadoPor(rolando))
+        rolando.batalla()
+        assert.equals(7, libroDeHechizos.poderDeArtefactoUsadoPor(rolando))
+        rolando.batalla()
+        assert.equals(0, libroDeHechizos.poderDeArtefactoUsadoPor(rolando))
+    }
+
 }
