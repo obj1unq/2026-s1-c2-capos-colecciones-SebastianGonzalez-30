@@ -24,3 +24,17 @@ object castillo {
 
   }
 }
+
+object palacioDeMarmol {
+  
+
+
+}
+
+object fortalezaDeAcero {
+  
+}
+
+object torreDeMarfil {
+  
+}
