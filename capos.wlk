@@ -144,5 +144,11 @@ object rolando {
 
     }
 
+    method esRolandoPoderoso() {
+      
+        return enemigos.any({enemigo => self.puedeVencerA(enemigo)})
+
+    }
+
 }
 
