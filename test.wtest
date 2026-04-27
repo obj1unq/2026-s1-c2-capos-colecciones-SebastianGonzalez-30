@@ -89,4 +89,5 @@ describe "test de rolando, su mochila, su castillo e historial " {
         assert.equals(0, libroDeHechizos.poderDeArtefactoUsadoPor(rolando))
     }
 
+    
 }

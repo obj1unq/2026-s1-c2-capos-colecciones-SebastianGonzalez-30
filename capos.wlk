@@ -138,9 +138,15 @@ object rolando {
 
     method moradasConquistablesDe(adversarios) {
       
-        const enemigosDerrotados = adversarios.filter({adversario => self.puedeVencerA(adversario)})
+        const enemigosDerrotados = self.enemigosDerrotables(adversarios)
 
         return  enemigosDerrotados.map({adversario => adversario.morada()})
+
+    }
+
+    method enemigosDerrotables(adversarios) {
+      
+        return adversarios.filter({adversario => self.puedeVencerA(adversario)})
 
     }
 
