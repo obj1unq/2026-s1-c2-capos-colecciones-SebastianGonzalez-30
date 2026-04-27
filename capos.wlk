@@ -1,5 +1,7 @@
 import artefactosMagicos.*
 import moradas.*
+import enemigos.*
+
 
 
 object rolando {
@@ -9,6 +11,8 @@ object rolando {
     const historialDeArtefactosEncontrados = [] 
     var poderBase = 5
     const morada = castillo
+    var enemigos = #{} 
+
 
     method encontrarArtefacto(artefacto) {
       
@@ -119,58 +123,26 @@ object rolando {
         return artefactoMasPoderoso.poderDeArtefactoUsadoPor(self)
     }
 
+    method puedeVencerA(enemigo) {
+      
+        return self.poderDePelea() > enemigo.poderDePelea()
+
+
+    }
+
+    method enemigos(_enemigos) {
+      
+        enemigos = _enemigos
+
+    }
+
+    method moradasConquistablesDe(adversarios) {
+      
+        const enemigosDerrotados = adversarios.filter({adversario => self.puedeVencerA(adversario)})
+
+        return  enemigosDerrotados.map({adversario => adversario.morada()})
+
+    }
+
 }
 
-object caterina {
-  
-    const poderDePelea = 28
-    const morada = fortalezaDeAcero  
-
-    method poderDePelea() {
-      
-        return poderDePelea
-
-    }
-
-    method morada() {
-      
-        return morada
-
-    }
-}
-
-object archibaldo {
-  
-    const poderDePelea = 16
-    const morada = palacioDeMarmol  
-
-    method poderDePelea() {
-      
-        return poderDePelea
-
-    }
-
-    method morada() {
-      
-        return morada
-
-    }
-}
-
-object astra {
-  
-    const poderDePelea = 14
-    const morada = torreDeMarfil  
-
-    method poderDePelea() {
-      
-        return poderDePelea
-
-    }
-
-    method morada() {
-      
-        return morada
-
-    }
-}
