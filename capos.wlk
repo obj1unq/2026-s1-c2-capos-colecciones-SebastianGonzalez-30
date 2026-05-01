@@ -11,7 +11,7 @@ object rolando {
     const historialDeArtefactosEncontrados = [] 
     var poderBase = 5
     const morada = castillo
-    var enemigos = #{} 
+    const enemigos = #{} 
 
 
     method encontrarArtefacto(artefacto) {
@@ -33,12 +33,10 @@ object rolando {
         
     }
 
-    method validarRecoleccionDeArtefacto() {
+    method puedeRecolectarArtefacto() {
       
-        return artefactosEnLaMochila.size() < self.capacidadMaxima() {
+        return artefactosEnLaMochila.size() < self.capacidadMaxima() 
 
-             
-        } 
     }
 
     method recolectarArtefacto(artefacto) {
@@ -49,7 +47,7 @@ object rolando {
 
     method recolectarArtefactoSiPuede(artefacto) {
       
-        if(self.validarRecoleccionDeArtefacto()) {
+        if(self.puedeRecolectarArtefacto()) {
 
             self.recolectarArtefacto(artefacto)
         }
@@ -64,12 +62,12 @@ object rolando {
     method guardarArtefactosEnMorada() {
       
         
-        morada.almacenarArtefactosDe(self)
+        morada.almacenarArtefactos(self.artefactosEnLaMochila())
         artefactosEnLaMochila.clear()
 
     }
 
-    method artefactosTotales() {
+    method posesiones() {
       
         return self.artefactosEnLaMochila().union(morada.almacenDeArtefactos())
 
@@ -77,7 +75,7 @@ object rolando {
 
     method poseeArtefacto(artefacto){
         
-        return self.artefactosTotales().contains(artefacto)
+        return self.posesiones().contains(artefacto)
     }
 
     method historialDeArtefactosEncontrados() {
@@ -109,7 +107,7 @@ object rolando {
 
     }
 
-    method batalla() {
+    method lucharEnBatalla() {
       
         self.artefactosEnLaMochila().forEach({artefacto => artefacto.usarArtefacto()})
         poderBase = poderBase + 1
@@ -118,7 +116,7 @@ object rolando {
 
     method poderDeArtefactoMasPoderosoEnLaMorada() {
       
-        const artefactoMasPoderoso = morada.almacenDeArtefactos().max({ artefacto => artefacto.poderDeArtefactoUsadoPor(self)})
+        const artefactoMasPoderoso = morada.artefactoMasPoderosoPara(self)
 
         return artefactoMasPoderoso.poderDeArtefactoUsadoPor(self)
     }
@@ -130,9 +128,9 @@ object rolando {
 
     }
 
-    method enemigos(_enemigos) {
+    method agregarEnemigos(nuevosEnemigos) {
       
-        enemigos = _enemigos
+        enemigos.addAll(nuevosEnemigos)
 
     }
 
@@ -140,7 +138,7 @@ object rolando {
       
         const enemigosDerrotados = self.enemigosDerrotables(adversarios)
 
-        return  enemigosDerrotados.map({adversario => adversario.morada()})
+        return  enemigosDerrotados.map({adversario => adversario.morada()}).asSet()
 
     }
 
@@ -150,7 +148,7 @@ object rolando {
 
     }
 
-    method esRolandoPoderoso() {
+    method esPoderoso() {
       
         return enemigos.any({enemigo => self.puedeVencerA(enemigo)})
 

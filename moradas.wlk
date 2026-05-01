@@ -10,9 +10,9 @@ object castillo {
     return almacenDeArtefactos
 
   }
-  method almacenarArtefactosDe(personaje) {
+  method almacenarArtefactos(artefactos) {
     
-    self.almacenDeArtefactos().addAll(personaje.artefactosEnLaMochila())
+    self.almacenDeArtefactos().addAll(artefactos)
     
     
 
@@ -23,6 +23,11 @@ object castillo {
     almacenDeArtefactos.add(artefacto)
 
   }
+
+  method artefactoMasPoderosoPara(personaje) {
+    return almacenDeArtefactos.max({ artefacto => artefacto.poderDeArtefactoUsadoPor(personaje) })
+}
+
 }
 
 object palacioDeMarmol {

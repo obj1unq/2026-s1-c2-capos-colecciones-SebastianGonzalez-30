@@ -29,7 +29,7 @@ describe "test de rolando, su mochila, su castillo e historial " {
         castillo.añadirArtefactoAlAlmacen(collarDivino)
         castillo.añadirArtefactoAlAlmacen(espadaDelDestino)
         rolando.encontrarArtefacto(armaduraDeAceroValyrio)
-        assert assert.equals(#{collarDivino, espadaDelDestino, armaduraDeAceroValyrio}, rolando.artefactosTotales())
+        assert assert.equals(#{collarDivino, espadaDelDestino, armaduraDeAceroValyrio}, rolando.posesiones())
     }
 
     test "el historial de encuentros de artefactos de rolando" {
@@ -40,7 +40,12 @@ describe "test de rolando, su mochila, su castillo e historial " {
       rolando.guardarArtefactosEnMorada()
       rolando.encontrarArtefacto(armaduraDeAceroValyrio)
       rolando.encontrarArtefacto(collarDivino)
-      assert.equals([espadaDelDestino, libroDeHechizos, collarDivino, armaduraDeAceroValyrio, collarDivino], rolando.historialDeArtefactosEncontrados())
+      
+      assert.equals(espadaDelDestino, rolando.historialDeArtefactosEncontrados().get(1))
+      assert.equals(libroDeHechizos, rolando.historialDeArtefactosEncontrados().get(2))
+      assert.equals(collarDivino, rolando.historialDeArtefactosEncontrados().get(3))
+      assert.equals(armaduraDeAceroValyrio, rolando.historialDeArtefactosEncontrados().get(4))
+      assert.equals(collarDivino, rolando.historialDeArtefactosEncontrados().get(5))
     }
 
     test "simulacion de batallas" {
@@ -51,19 +56,19 @@ describe "test de rolando, su mochila, su castillo e historial " {
         rolando.encontrarArtefacto(armaduraDeAceroValyrio)
         rolando.encontrarArtefacto(collarDivino)
         
-        rolando.batalla() //simulacion de la primer batalla
+        rolando.lucharEnBatalla() //simulacion de la primer batalla
         assert.equals(6, rolando.poderBase())
         assert.equals(3, espadaDelDestino.poderDeArtefactoUsadoPor(rolando))
         assert.equals(6, armaduraDeAceroValyrio.poderDeArtefactoUsadoPor(rolando))
         assert.equals(3, collarDivino.poderDeArtefactoUsadoPor(rolando))
         
-        rolando.batalla() //simulacion de la segunda batalla
+        rolando.lucharEnBatalla() //simulacion de la segunda batalla
         assert.equals(7, rolando.poderBase())
         assert.equals(3.5, espadaDelDestino.poderDeArtefactoUsadoPor(rolando))
         assert.equals(6, armaduraDeAceroValyrio.poderDeArtefactoUsadoPor(rolando))
         assert.equals(5, collarDivino.poderDeArtefactoUsadoPor(rolando))
         
-        rolando.batalla() //simulacion de la tercer batalla
+        rolando.lucharEnBatalla() //simulacion de la tercer batalla
         assert.equals(8, rolando.poderBase())
         assert.equals(4, espadaDelDestino.poderDeArtefactoUsadoPor(rolando))
         assert.equals(6, armaduraDeAceroValyrio.poderDeArtefactoUsadoPor(rolando))
@@ -81,11 +86,11 @@ describe "test de rolando, su mochila, su castillo e historial " {
         castillo.añadirArtefactoAlAlmacen(collarDivino)
 
         assert.equals(4, libroDeHechizos.poderDeArtefactoUsadoPor(rolando))
-        rolando.batalla()
+        rolando.lucharEnBatalla()
         assert.equals(6, libroDeHechizos.poderDeArtefactoUsadoPor(rolando))
-        rolando.batalla()
+        rolando.lucharEnBatalla()
         assert.equals(7, libroDeHechizos.poderDeArtefactoUsadoPor(rolando))
-        rolando.batalla()
+        rolando.lucharEnBatalla()
         assert.equals(0, libroDeHechizos.poderDeArtefactoUsadoPor(rolando))
     }
 

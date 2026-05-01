@@ -3,17 +3,17 @@ import capos.*
 
 object espadaDelDestino {
   
-     var cantidadDeBatallasEnUso = 0
+     var fueUsadaEnBatalla = false
 
     method poderDeArtefactoUsadoPor(personaje) {
     
-    return personaje.poderBase() / if (cantidadDeBatallasEnUso == 0) 1 else 2
+    return personaje.poderBase() / if (fueUsadaEnBatalla) 1 else 2
     
     }
 
     method usarArtefacto() {
       
-        cantidadDeBatallasEnUso = cantidadDeBatallasEnUso + 1
+        fueUsadaEnBatalla = true
 
     }
     
@@ -22,7 +22,7 @@ object espadaDelDestino {
 object libroDeHechizos {
   
     var hechizosDisponibles = []
-    var cantidadDeBatallasEnUso = 0
+    
     
 
     method poderDeArtefactoUsadoPor(personaje) {
@@ -41,7 +41,6 @@ object libroDeHechizos {
 
     method usarArtefacto() {
       
-        cantidadDeBatallasEnUso = cantidadDeBatallasEnUso + 1
         hechizosDisponibles.remove(self.primerHechizo())
 
     }
@@ -52,6 +51,7 @@ object libroDeHechizos {
 
     }
 
+    //el libro debe de tener al menos un hechizo disponible 
     method primerHechizo() {
       
         return hechizosDisponibles.first()
@@ -68,15 +68,7 @@ object collarDivino {
 
     method poderDeArtefactoUsadoPor(personaje) {
 
-        return(
-                if(personaje.poderBase() > 6) {
-
-                    cantidadDeBatallasEnUso + 3 
-                } else {
-                    3
-                }
-
-        )
+        return self.poderBaseDeArtefacto() + if(personaje.poderBase() > 6) cantidadDeBatallasEnUso else 0
 
     }
 
@@ -86,13 +78,17 @@ object collarDivino {
 
     }
 
-    
+    method poderBaseDeArtefacto() {
+      
+        return 3
+
+    }
 
 }
 
 object armaduraDeAceroValyrio {
   
-    var cantidadDeBatallasEnUso = 0  
+    
     
     method poderDeArtefactoUsadoPor(personaje) {
 
@@ -102,7 +98,7 @@ object armaduraDeAceroValyrio {
 
     method usarArtefacto() {
       
-        cantidadDeBatallasEnUso = cantidadDeBatallasEnUso + 1
+        
 
     }
 
